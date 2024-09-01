@@ -6,3 +6,7 @@ imutils
 pickle-mixin
 scikit-learn
 av
+Flask
+numpy
+opencv-python
+gunicorn
