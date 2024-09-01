@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="col-xs-12 col-sm-6 col-md-6 clearmargin clearpadding col-sm-push-6"><img class="main-image" src="/static/assets/img/flat-3252983.png"></div>
+<div class="col-xs-12 col-sm-6 col-md-6 col-sm-pull-6" style="padding: 100px;">
+    <h1 class="text-center">Facial Liveness Demo</h1>
+    <hr>
+    <p>Face liveness detection is a security technology designed to distinguish between real human faces and fake representations such as photos, videos, or masks. It is a crucial component in biometric authentication systems that aims to ensure that the individual being verified is genuinely present and not using spoofing techniques.<br></p>
+    <p>Please follow the following instructions as we proceed forward:<br></p>
+    <ol class="text-light">
+        <li>Ensure your face is well-lit and visible to the camera.</li>
+        <li>Position yourself in front of the camera.</li>
+        <li> Click the <strong>Open Webcam</strong> button to begin the liveness check.</li>
+    </ol>
+    <form style="text-align: center;vertical-align: middle;" method="POST" action="">
+        <input type="submit" value="Let's Begin!" name="next_button" class="btn btn-danger" style="border:none;width:180px;height:70px;margin-left:14px;background-color:#3abaa1;color:rgb(0, 0, 0);margin-top:12px; text-align:center;">
+    </form>
+</div>
+{% endblock content %}

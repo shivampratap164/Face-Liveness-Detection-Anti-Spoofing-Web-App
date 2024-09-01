@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.screen {
+    display: none; /* Initially hide all screens */
+    text-align: center;
+    padding: 20px;
+}
+
+.screen h1, .screen p {
+    margin: 20px 0;
+}
+
+#videoFeed {
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+}
+
+.face-frame {
+    position: absolute;
+    border: 2px dashed rgba(0, 123, 255, 0.7);
+    border-radius: 50%;
+    width: 80%;
+    height: 80%;
+    top: 10%;
+    left: 10%;
+}
+
+.instructions {
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.progress-bar {
+    height: 5px;
+    background: #007bff;
+    margin: 20px 0;
+}
+
+#resultIcon {
+    font-size: 50px;
+    margin: 20px;
+}
+
+#resultMessage {
+    font-size: 24px;
+    margin: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

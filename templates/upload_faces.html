@@ -1,0 +1,125 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<style>
+#video {
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    width: 640px;
+    height: auto;
+    display: none;
+    position: relative;
+}
+
+.custom-button {
+    border: none;
+    width: 150px;
+    height: 50px;
+    background-color: #3abaa1;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin: 10px; /* Add margin between buttons */
+}
+
+.custom-button:hover {
+    background-color: #33ccaa;
+}
+
+.center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height for vertical centering */
+    text-align: center;
+    padding-top: 70px; /* Adjust this value to match the height of your navbar */
+}
+
+.face-frame {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 80%;
+    border: 2px dashed rgba(0, 123, 255, 0.7);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    display: none; /* Hidden initially */
+}
+
+#placeholderImage {
+    display: block;
+    margin: 0 auto; /* Center horizontally */
+}
+</style>
+
+<div class="bootstrap_img_upload">
+    <div class="container py-5 center-container">
+        
+        <header id="header" class="text-white text-center">
+            <h1 class="display-4">Capture Faces with Your Webcam</h1>
+            <p>If the video feed shows no faces, try repositioning yourself or adjusting the lighting.<br>Please use the Start and Stop buttons to control the webcam.</p>
+            <!-- Image that will be hidden when the video starts -->
+            <img id="placeholderImage" src="/static/assets/img/recognition_img.png" alt="Recognition" width="300" class="mb-4">
+        </header>
+
+        <!-- Buttons -->
+        <div class="text-center">
+            <button id="startButton" class="custom-button" onclick="startVideo()">Webcam</button>
+            <button id="stopButton" class="custom-button" onclick="stopVideo()" style="display: none;">Stop Video</button>
+        </div>
+
+        <!-- Video Feed -->
+        <div style="position: relative; margin-top: 20px;">
+            <img id="video" alt="Video Feed">
+            <div class="face-frame" id="faceFrame"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function startVideo() {
+        const img = document.getElementById('video');
+        const placeholderImage = document.getElementById('placeholderImage');
+        const faceFrame = document.getElementById('faceFrame');
+        const header = document.getElementById('header');
+
+        // Hide header and placeholder image
+        header.style.display = 'none'; 
+        placeholderImage.style.display = 'none';
+
+        // Show video feed
+        img.src = "{{ url_for('start_video') }}";
+        img.style.display = 'block';
+        faceFrame.style.display = 'block'; 
+
+        // Adjust button visibility
+        document.getElementById('startButton').style.display = 'none';
+        document.getElementById('stopButton').style.display = 'inline';
+    }
+
+    function stopVideo() {
+        const img = document.getElementById('video');
+        const placeholderImage = document.getElementById('placeholderImage');
+        const faceFrame = document.getElementById('faceFrame');
+        const header = document.getElementById('header');
+
+        // Stop the video feed
+        img.src = ''; 
+        img.style.display = 'none'; 
+
+        // Show header and placeholder image again
+        header.style.display = 'block'; 
+        placeholderImage.style.display = 'block'; 
+        faceFrame.style.display = 'none'; 
+
+        // Adjust button visibility
+        document.getElementById('startButton').style.display = 'inline';
+        document.getElementById('stopButton').style.display = 'none';
+    }
+</script>
+{% endblock content %}

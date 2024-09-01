@@ -1,0 +1,259 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liveness Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #video {
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            width: 640px;
+            height: auto;
+            display: none;
+            position: relative;
+        }
+
+        .face-frame {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80%;
+            height: 80%;
+            border: 2px dashed rgba(0, 123, 255, 0.7);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            display: none; /* Hidden initially */
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .status {
+            font-size: 20px;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .instructions {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 20px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+
+        /* Accessibility enhancements */
+        .voice-instruction {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Liveness Detection</h1>
+    <button id="startButton" onclick="startVideo()">Open Webcam</button>
+    <button id="stopButton" onclick="stopVideo()" style="display: none;">Stop Video</button>
+    <div style="position: relative;">
+        <img id="video" alt="Video Feed">
+        <div class="face-frame" id="faceFrame"></div>
+    </div>
+
+    <!-- <div class="container">
+        <div class="status" id="status">Status: Waiting for action...</div>
+        <div class="voice-instruction" id="voiceInstruction">Voice instructions enabled.</div>
+    </div> -->
+
+    <!-- <div class="instructions">
+        <h2>Instructions</h2>
+        <p>1. Ensure your face is well-lit and visible to the camera.</p>
+        <p>2. Position yourself in front of the camera.</p>
+        <p>3. Click the <strong>Open Webcam</strong> button to begin the liveness check.</p>
+        <p>4. Real-time feedback will be displayed below.</p>
+    </div> -->
+
+    <script>
+        function startVideo() {
+            const img = document.getElementById('video');
+            const faceFrame = document.getElementById('faceFrame');
+            img.src = "{{ url_for('start_video') }}"; // Replace with actual video stream URL
+            img.style.display = 'block'; // Show the video feed
+            faceFrame.style.display = 'block'; // Show the face frame
+            document.getElementById('status').innerText = 'Status: Webcam is active...';
+            document.getElementById('startButton').style.display = 'none';
+            document.getElementById('stopButton').style.display = 'inline';
+            // Simulate voice instruction
+            document.getElementById('voiceInstruction').innerText = "Align your face within the frame.";
+        }
+
+        function stopVideo() {
+            const img = document.getElementById('video');
+            const faceFrame = document.getElementById('faceFrame');
+            img.src = '';
+            img.style.display = 'none'; // Hide the video feed
+            faceFrame.style.display = 'none'; // Hide the face frame
+            document.getElementById('status').innerText = 'Status: Webcam is stopped.';
+            document.getElementById('startButton').style.display = 'inline';
+            document.getElementById('stopButton').style.display = 'none';
+            document.getElementById('voiceInstruction').innerText = ""; // Clear voice instruction
+        }
+
+        // Simulate liveness detection feedback
+        function simulateLivenessCheck() {
+            const status = document.getElementById('status');
+            status.innerText = 'Status: Checking liveness...';
+            setTimeout(() => {
+                const success = Math.random() > 0.5; // Simulate success or failure
+                if (success) {
+                    status.innerText = 'Status: Liveness confirmed! ✅';
+                    status.className = 'status success';
+                } else {
+                    status.innerText = 'Status: Liveness check failed. ❌';
+                    status.className = 'status error';
+                }
+            }, 2000); // Simulate a 2-second check
+        }
+    </script>
+</body>
+</html>
+
+
+<!-- <<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liveness Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .screen {
+            display: none; /* Initially hide all screens */
+            text-align: center;
+            padding: 20px;
+        }
+
+        .screen h1, .screen p {
+            margin: 20px 0;
+        }
+
+        #videoFeed {
+            width: 100%;
+            max-width: 640px;
+            height: auto;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+        }
+
+        .face-frame {
+            position: absolute;
+            border: 2px dashed rgba(0, 123, 255, 0.7);
+            border-radius: 50%;
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+        }
+
+        .instructions {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            height: 5px;
+            background: #007bff;
+            margin: 20px 0;
+            width: 0%; /* Start with 0 width */
+            transition: width 0.2s;
+        }
+
+        #resultIcon {
+            font-size: 50px;
+            margin: 20px;
+        }
+
+        #resultMessage {
+            font-size: 24px;
+            margin: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    Landing Screen -->
+    <!-- <div class="screen landing">
+        <h1>Welcome to Aadhaar Face Authentication</h1>
+        <p>Ensure secure access by verifying your identity with a simple face scan.</p>
+        <button id="startAuthBtn">Start Authentication</button>
+    </div>
+
+   
+    
