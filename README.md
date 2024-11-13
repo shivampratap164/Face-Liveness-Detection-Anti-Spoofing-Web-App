@@ -23,7 +23,7 @@ This project was inspired by [jomariya23156's face recognition web app](https://
 Fork and clone the repo locally:
 
 ```sh
-git clone https://github.com/birdowl21/Face-Liveness-Detection-Anti-Spoofing-Web-App.git
+git clone https://github.com/shivampratap164/Face-Liveness-Detection-Anti-Spoofing-Web-App.git
 ```
 
 ### Step 2: Create and Activate a Virtual Environment  
