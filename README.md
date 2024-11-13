@@ -67,18 +67,7 @@ If you face issues deploying the app, refer to the [Streamlit remote deployment 
 
 ---
 
-## 📸 Sample Output  
 
-### Normal Detection  
-![Normal](/test_pics/normal.png?raw=true "Normal")
-
-### Detection with Spoofed Picture  
-![With Picture](/test_pics/with_pic.jpeg?raw=true "With picture")
-
-### Detection with Spoofed Video  
-![With Video](/test_pics/with_video.jpeg?raw=true "With video")
-
----
 
 ## 🤝 Contributing  
 
